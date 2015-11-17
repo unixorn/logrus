@@ -55,3 +55,18 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Misc
+*.*.un~
+*.Z
+*.a
+*.bz2
+*.gz
+*.o
+*.sublime-project
+*.sublime-workspace
+*.tbz
+*.tbz2
+*.tgz
+*~
+.DS_Store
