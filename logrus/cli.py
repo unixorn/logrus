@@ -15,12 +15,12 @@
 # limitations under the License.
 #
 #
-# Utility functions for dealing with programs.
-#
-# Do git-style so `haze foo` will look for a program named haze-foo, and
-# `haze foo bar` will look for haze-foo-bar.
+"""
+Utility functions for dealing with programs.
+"""
 
 import distutils.spawn
+
 
 def isProgram(name):
   """
