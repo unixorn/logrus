@@ -22,6 +22,35 @@ Utility functions for dealing with programs.
 import distutils.spawn
 
 
+def findSubCommand(args):
+  """
+  Given a list ['foo','bar', 'baz'], attempts to create a command name in the
+  format 'foo-bar-baz'. If that command exists, we run it. If it doesn't, we
+  check to see if foo-bar exists, in which case we run `foo-bar baz`. We keep
+  taking chunks off the end of the command name and adding them to the argument
+  list until we find a valid command name we can run.
+
+  This allows us to easily make git-style command drivers where for example we
+  have a driver script, foo, and subcommand scripts foo-bar and foo-baz, and when
+  the user types `foo bar foobar` we find the foo-bar script and run it as
+  `foo-bar foobar`
+
+  :param list|tuple args: list to try and convert to a command args pair
+  :returns: command and arguments list
+  :rtype: tuple
+  :raises StandardError: if the args can't be matched to an executable subcommand
+  """
+  # If the only command we find is the first element of args, we've found the
+  # driver script itself and re-executing it will cause an infinite loop, so
+  # don't even look at the first element on its own.
+  for n in range(len(args) - 1):
+    command = "-".join(args[:(len(args) - n)])
+    commandArgs = args[len(args) - n:]
+    if isProgram(command):
+      return (command, commandArgs)
+  raise StandardError("Could not find a %s subcommand executable" % command)
+
+
 def isProgram(name):
   """
   Search for a given program in $PATH, and return True if it exists and
