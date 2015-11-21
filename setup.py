@@ -18,7 +18,7 @@
 from setuptools import setup, find_packages
 
 name = "logrus"
-version = "0.0.2"
+version = "0.0.3"
 
 setup(
   name = name,
