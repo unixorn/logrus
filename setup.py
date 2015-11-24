@@ -14,20 +14,61 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+logrus is a collection of utility functions.
+"""
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_packages, Command
+import os
+import shutil
 
 name = "logrus"
-version = "0.0.3"
+version = "0.0.4"
+
+
+class CleanCommand(Command):
+  """
+  Add a clean option to setup.py's commands
+  """
+  description = "Clean up"
+  user_options = []
+
+
+  def initialize_options(self):
+    self.cwd = None
+
+
+  def finalize_options(self):
+    self.cwd = os.getcwd()
+
+
+  def run(self):
+    assert os.getcwd() == self.cwd, "Must be in package root: %s" % self.cwd
+    if os.path.isdir("build"):
+      shutil.rmtree("build")
+    if os.path.isdir("dist"):
+      shutil.rmtree("dist")
+
+
 
 setup(
-  name = name,
-  author = "Joe Block",
-  author_email = "jpb@unixorn.net",
-  description = "The Logrus is a collection of random utility functions",
-  url = "https://github.com/unixorn/logrus",
-  packages = find_packages(),
-  version = version,
-  download_url = "https://github.com/unixorn/logrus/tarball/%s" % version,
-  keywords = ["devops", "utility"],
+  name=name,
+  author="Joe Block",
+  author_email="jpb@unixorn.net",
+  description="The Logrus is a collection of random utility functions",
+  url="https://github.com/unixorn/logrus",
+  packages=find_packages(),
+  version=version,
+  download_url="https://github.com/unixorn/logrus/tarball/%s" % version,
+  classifiers=[
+    "Development Status :: 3 - Alpha",
+    "Operating System :: POSIX",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 2.7",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+  ],
+  cmdclass={
+    "clean": CleanCommand,
+  },
+  keywords=["devops", "utility"],
 )
