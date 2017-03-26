@@ -1,6 +1,6 @@
 # The Logrus
 #
-# Copyright 2015 Joe Block <jpb@unixorn.net>
+# Copyright 2015-2017 Joe Block <jpb@unixorn.net>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import os
 import shutil
 
 name = "logrus"
-version = "0.0.4"
+version = "0.0.5"
 
 
 class CleanCommand(Command):
@@ -50,7 +50,6 @@ class CleanCommand(Command):
       shutil.rmtree("dist")
 
 
-
 setup(
   name=name,
   author="Joe Block",
@@ -64,7 +63,7 @@ setup(
     "Development Status :: 3 - Alpha",
     "Operating System :: POSIX",
     "License :: OSI Approved :: Apache Software License",
-    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 2.6",
     "Topic :: Software Development :: Libraries :: Python Modules",
   ],
   cmdclass={
