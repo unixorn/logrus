@@ -44,7 +44,7 @@ def findSubCommand(args):
   # driver script itself and re-executing it will cause an infinite loop, so
   # don't even look at the first element on its own.
   for n in range(len(args) - 1):
-    command = "-".join(args[:(len(args) - n)])
+    command = '-'.join(args[:(len(args) - n)])
     commandArgs = args[len(args) - n:]
     if isProgram(command):
       return (command, commandArgs)

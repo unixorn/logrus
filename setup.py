@@ -22,15 +22,15 @@ from setuptools import setup, find_packages, Command
 import os
 import shutil
 
-name = "logrus"
-version = "0.0.5"
+name = 'logrus'
+version = '0.0.6'
 
 
 class CleanCommand(Command):
   """
   Add a clean option to setup.py's commands
   """
-  description = "Clean up"
+  description = 'Clean up'
   user_options = []
 
 
@@ -44,10 +44,10 @@ class CleanCommand(Command):
 
   def run(self):
     assert os.getcwd() == self.cwd, "Must be in package root: %s" % self.cwd
-    if os.path.isdir("build"):
-      shutil.rmtree("build")
-    if os.path.isdir("dist"):
-      shutil.rmtree("dist")
+    if os.path.isdir('build'):
+      shutil.rmtree('build')
+    if os.path.isdir('dist'):
+      shutil.rmtree('dist')
 
 
 setup(
