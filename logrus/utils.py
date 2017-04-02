@@ -19,10 +19,16 @@
 Random utility functions
 """
 
-import os
 import errno
+import os
 
 def mkdir_p(path):
+  """
+  Mimic `mkdir -p` since os module doesn't provide one.
+
+  :param str name: Name of program to search for
+
+  """
   try:
     os.makedirs(path)
   except OSError as exception:
