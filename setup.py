@@ -23,7 +23,7 @@ import os
 import shutil
 
 name = 'logrus'
-version = '0.0.6'
+version = '0.0.7'
 
 
 class CleanCommand(Command):

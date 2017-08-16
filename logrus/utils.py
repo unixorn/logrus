@@ -20,7 +20,9 @@ Random utility functions
 """
 
 import errno
+import logging
 import os
+
 
 def mkdir_p(path):
   """
@@ -34,3 +36,31 @@ def mkdir_p(path):
   except OSError as exception:
     if exception.errno != errno.EEXIST:
       raise
+
+
+def getCustomLogger(name, logLevel):
+  '''
+  Set up logging
+
+  :param str name: What log level to set
+  :param str logLevel: What log level to use
+  :rtype: logger
+  '''
+  assert isinstance(name, basestring), ("name must be a string but is %r" % name)
+
+  validLogLevels = ['CRITICAL', 'DEBUG', 'ERROR', 'INFO', 'WARNING']
+
+  if not logLevel:
+    logLevel = 'DEBUG'
+
+  # If they don't specify a valid log level, err on the side of verbosity
+  if logLevel.upper() not in validLogLevels:
+    logLevel = 'DEBUG'
+
+  numericLevel = getattr(logging, logLevel.upper(), None)
+  if not isinstance(numericLevel, int):
+    raise ValueError("Invalid log level: %s" % logLevel)
+
+  logging.basicConfig(level=numericLevel, format='%(asctime)s %(levelname)-9s:%(module)s:%(funcName)s: %(message)s')
+  logger = logging.getLogger(name)
+  return logger
