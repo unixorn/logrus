@@ -18,12 +18,23 @@
 logrus is a collection of utility functions.
 """
 
-from setuptools import setup, find_packages, Command
 import os
 import shutil
+import subprocess
+from setuptools import setup, find_packages, Command
+
+
+def system_call(command):
+  """Run a command and return stdout.
+
+  Would be better to use subprocess.check_output, but this works on 2.6,
+  which is still the system Python on CentOS 7."""
+  p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
+  return p.stdout.read()
+
 
 name = 'logrus'
-version = '0.0.7'
+version = "0.1.%s" % (system_call('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
