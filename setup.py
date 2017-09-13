@@ -14,22 +14,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""
+'''
 logrus is a collection of utility functions.
-"""
+'''
 
-from setuptools import setup, find_packages, Command
 import os
 import shutil
+import subprocess
+from setuptools import setup, find_packages, Command
+
+
+def system_call(command):
+  '''
+  Run a command and return stdout.
+
+  Would be better to use subprocess.check_output, but this works on 2.6,
+  which is still the system Python on CentOS 7.'''
+  p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
+  return p.stdout.read()
+
 
 name = 'logrus'
-version = '0.0.6'
+version = "0.1.%s" % (system_call('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
-  """
+  '''
   Add a clean option to setup.py's commands
-  """
+  '''
   description = 'Clean up'
   user_options = []
 
