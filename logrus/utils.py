@@ -15,27 +15,14 @@
 # limitations under the License.
 #
 #
-"""
+'''
 Random utility functions
-"""
+'''
 
 import errno
 import logging
 import os
-
-
-def mkdir_p(path):
-  """
-  Mimic `mkdir -p` since os module doesn't provide one.
-
-  :param str name: Name of program to search for
-
-  """
-  try:
-    os.makedirs(path)
-  except OSError as exception:
-    if exception.errno != errno.EEXIST:
-      raise
+import subprocess
 
 
 def getCustomLogger(name, logLevel):
@@ -64,3 +51,33 @@ def getCustomLogger(name, logLevel):
   logging.basicConfig(level=numericLevel, format='%(asctime)s %(levelname)-9s:%(module)s:%(funcName)s: %(message)s')
   logger = logging.getLogger(name)
   return logger
+
+
+def mkdir_p(path):
+  '''
+  Mimic `mkdir -p` since os module doesn't provide one.
+
+  :param str name: Name of program to search for
+
+  '''
+  try:
+    os.makedirs(path)
+  except OSError as exception:
+    if exception.errno != errno.EEXIST:
+      raise
+
+
+def systemCall(command):
+  '''
+  Run a command and return stdout.
+
+  Would be better to use subprocess.check_output, but this works on 2.6,
+  which is still the system Python on CentOS 7.
+
+  :param str command: Command to run
+  :rtype: str
+  '''
+  assert isinstance(command, basestring), ("command must be a string but is %r" % command)
+
+  p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
+  return p.stdout.read()
