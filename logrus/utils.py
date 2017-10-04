@@ -59,7 +59,7 @@ def getCustomLogger(name, logLevel):
   if not isinstance(numericLevel, int):
     raise ValueError("Invalid log level: %s" % logLevel)
 
-  logging.basicConfig(level=numericLevel, format='%(asctime)s %(levelname)-9s:%(module)s:%(funcName)s: %(message)s')
+  logging.basicConfig(level=numericLevel, format='%(asctime)s %(levelname)-9s:%(name)s:%(module)s:%(funcName)s: %(message)s')
   logger = logging.getLogger(name)
   return logger
 
