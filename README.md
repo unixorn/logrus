@@ -78,10 +78,6 @@ def fooDriver():
 
 ```
 
-### humanTime(seconds)
-
-Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
-
 ### isProgram(name)
 
 Search for a given program in `$PATH`, and return True if it exists and
@@ -91,8 +87,26 @@ is executable.
 :returns: whether or not the program can be found in $PATH
 :rtype: bool
 
+## logrus.time
+
+### humanTime(seconds)
+
+Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
+
 ## logrus.utils
+
+### getCustomLogger(name, logLevel)
+
+Returns a custom logger with nicely formatted output.
+
+:param str name: What log level to set
+:param str logLevel: What log level to use
+:rtype: logger
 
 ### mkdir_p(path)
 
 os module doesn't have a `mkdir -p` equivalent so added one.
+
+### squashDicts(*dict_args)
+
+Return a dict that is all the dict_args squashed together.
