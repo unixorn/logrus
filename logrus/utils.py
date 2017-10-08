@@ -68,8 +68,7 @@ def mkdir_p(path):
   '''
   Mimic `mkdir -p` since os module doesn't provide one.
 
-  :param str name: Name of program to search for
-
+  :param str path: directory to create
   '''
   try:
     os.makedirs(path)
@@ -88,7 +87,7 @@ def systemCall(command):
   :param str command: Command to run
   :rtype: str
   '''
-  assert isinstance(command, basestring), ("command must be a string but is %r" % command)
+  assert isinstance(command, basestring), ("command must be a string but is type %r" % command)
 
   p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
   return p.stdout.read()

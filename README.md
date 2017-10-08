@@ -18,6 +18,14 @@ sourcing them now, I'm hoping to not have to write them again.
 
 Everything in this repository is Apache 2.0 licensed.
 
+# Included Commands
+
+## human-time
+
+Takes a value in seconds either from stdin or as arg 1 and converts it to a more meat-friendly format using the humanTime function.
+
+`human-time 1234` will print "20 minutes, 34 seconds"
+
 # Included functions
 
 ## logrus.cli
@@ -69,6 +77,10 @@ def fooDriver():
   check_call([command] + args)
 
 ```
+
+### humanTime(seconds)
+
+Takes a value in seconds, returns it in meat-friendly format. `humanFriendlyTime(8675309)` would return "100 days 9 hours 48 minutes 29 seconds".
 
 ### isProgram(name)
 

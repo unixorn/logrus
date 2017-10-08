@@ -29,13 +29,14 @@ def system_call(command):
   Run a command and return stdout.
 
   Would be better to use subprocess.check_output, but this works on 2.6,
-  which is still the system Python on CentOS 7.'''
+  which is still the system Python on CentOS 7.
+  '''
   p = subprocess.Popen([command], stdout=subprocess.PIPE, shell=True)
   return p.stdout.read()
 
 
 name = 'logrus'
-version = "0.1.%s" % (system_call('git rev-list HEAD --count').strip())
+version = "0.2.%s" % (system_call('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
@@ -80,6 +81,11 @@ setup(
   ],
   cmdclass={
     "clean": CleanCommand,
+  },
+  entry_points={
+    "console_scripts": [
+      "human-time = %s.time:humanTimeConverter" % name,
+    ]
   },
   keywords=["devops", "utility"],
 )
