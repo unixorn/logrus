@@ -1,5 +1,6 @@
 # logrus
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub stars](https://img.shields.io/github/stars/unixorn/logrus.svg)](https://github.com/unixorn/logrus/stargazers)
 [![Code Climate](https://codeclimate.com/github/unixorn/logrus/badges/gpa.svg)](https://codeclimate.com/github/unixorn/logrus)
 [![Issue Count](https://codeclimate.com/github/unixorn/logrus/badges/issue_count.svg)](https://codeclimate.com/github/unixorn/logrus)
@@ -16,7 +17,7 @@ sourcing them now, I'm hoping to not have to write them again.
 
 # License
 
-Everything in this repository is Apache 2.0 licensed.
+Apache 2.0 license.
 
 # Included Commands
 
