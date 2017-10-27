@@ -13,8 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
-#
+
 '''
 Random utility functions
 '''
@@ -25,14 +24,17 @@ import os
 import subprocess
 
 
-def getCustomLogger(name, logLevel):
+def getCustomLogger(name, logLevel, logFormat='%(asctime)s %(levelname)-9s:%(name)s:%(module)s:%(funcName)s: %(message)s'):
   '''
   Set up logging
 
   :param str name: What log level to set
   :param str logLevel: What log level to use
+  :param str logFormat: Format string for logging
   :rtype: logger
   '''
+  assert isinstance(logFormat, basestring), ("logFormat must be a string but is %r" % logFormat)
+  assert isinstance(logLevel, basestring), ("logLevel must be a string but is %r" % logLevel)
   assert isinstance(name, basestring), ("name must be a string but is %r" % name)
 
   validLogLevels = ['CRITICAL', 'DEBUG', 'ERROR', 'INFO', 'WARNING']
@@ -48,7 +50,7 @@ def getCustomLogger(name, logLevel):
   if not isinstance(numericLevel, int):
     raise ValueError("Invalid log level: %s" % logLevel)
 
-  logging.basicConfig(level=numericLevel, format='%(asctime)s %(levelname)-9s:%(name)s:%(module)s:%(funcName)s: %(message)s')
+  logging.basicConfig(level=numericLevel, format=logFormat)
   logger = logging.getLogger(name)
   return logger
 
@@ -59,6 +61,7 @@ def mkdir_p(path):
 
   :param str path: directory to create
   '''
+  assert isinstance(path, basestring), ("path must be a string but is %r" % path)
   try:
     os.makedirs(path)
   except OSError as exception:

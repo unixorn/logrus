@@ -24,7 +24,7 @@ import subprocess
 from setuptools import setup, find_packages, Command
 
 
-def system_call(command):
+def systemCall(command):
   '''
   Run a command and return stdout.
 
@@ -36,7 +36,7 @@ def system_call(command):
 
 
 name = 'logrus'
-version = "0.2.%s" % (system_call('git rev-list HEAD --count').strip())
+version = "0.2.%s" % (systemCall('git rev-list HEAD --count').strip())
 
 
 class CleanCommand(Command):
